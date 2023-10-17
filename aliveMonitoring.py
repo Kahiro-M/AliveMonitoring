@@ -31,10 +31,10 @@ def check_ip_status(name, ip_address):
     # IPアドレスの状態を確認するコードをここに追加
     try:
         # pingコマンドを実行
-        result = subprocess.run(["ping", ip_address], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = subprocess.run(["ping", ip_address, "-n", "1"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         # pingの結果を解析
-        if "パケット数: 送信 = 4、受信 = 4" in result.stdout.decode(encoding='CP932'):
+        if "パケット数: 送信 = 1、受信 = 1" in result.stdout.decode(encoding='CP932'):
             print(f"{datetime.now(JST).strftime('%Y-%m-%d %H:%M:%S')}  [{name}] : IPアドレス {ip_address} は正常です。")
         else:
             print(f"{datetime.now(JST).strftime('%Y-%m-%d %H:%M:%S')}  [{name}] : IPアドレス {ip_address} に問題があります。")
